@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrataCEP.API", "TrataCEP.API\TrataCEP.API.csproj", "{75F2693D-63D5-4F2C-B5B3-1C806ECCE212}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrataCEP.Presentation", "TrataCEP.Presentation\TrataCEP.Presentation.csproj", "{27810A95-E83E-4572-B6B4-51EE0394E992}"
+	ProjectSection(ProjectDependencies) = postProject
+		{75F2693D-63D5-4F2C-B5B3-1C806ECCE212} = {75F2693D-63D5-4F2C-B5B3-1C806ECCE212}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75F2693D-63D5-4F2C-B5B3-1C806ECCE212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F2693D-63D5-4F2C-B5B3-1C806ECCE212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F2693D-63D5-4F2C-B5B3-1C806ECCE212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F2693D-63D5-4F2C-B5B3-1C806ECCE212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27810A95-E83E-4572-B6B4-51EE0394E992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27810A95-E83E-4572-B6B4-51EE0394E992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27810A95-E83E-4572-B6B4-51EE0394E992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27810A95-E83E-4572-B6B4-51EE0394E992}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6BF8511-632F-4D9F-8ECC-9F829ECEC17D}
+	EndGlobalSection
+EndGlobal
