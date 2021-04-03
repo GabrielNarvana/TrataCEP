@@ -8,17 +8,18 @@
     UF,
     IBGE,
     GIA,
-    DD,
+    DDD,
     Siafi)
 values(
-    :DataCriacao,
-    :CEP,
-    :Logradouro,
-    :Complemento,
-    :Bairro,
-    :Localidade ,
-    :UF,
-    :IBGE,
-    :GIA,
-    :DD,
-    :Siafi)
+    @DataCriacao,
+    @CEP,
+    @Logradouro,
+    @Complemento,
+    @Bairro,
+    @Localidade ,
+    @UF,
+    @IBGE,
+    @GIA,
+    @DDD,
+    @Siafi)
+    RETURNING Id

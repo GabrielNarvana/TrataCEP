@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,39 +30,26 @@ namespace TrataCEP.API
             _configuration = configuration;
         }
 
+        public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient();
-
-
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile($"appsettings.json");
-            _configuration = builder.Build();
-
-            var serviceProvider = services.BuildServiceProvider();
-
-
-            services.AddControllers();
             services.AddSingleton<IConfiguration>(_configuration);
-            services.AddTransient<IPostgressConnection>(s => new PostgressConnectionFactory(_configuration.GetSection("postgresConnection").Value));
-            services.AddSingleton<IEnderecoRepository, EnderecoRepository>();
+            services.AddHttpClient();
+            services.AddControllers();
 
-    
+            services.AddSingleton<IPostgressConnection>(s => new PostgressConnectionFactory(_configuration.GetSection("postgresConnection").Value));
+
+            services.AddSingleton<IEnderecoRepository, EnderecoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            //app.UseHttpsRedirection();
-
-            //app.UseRouting();
-
-            //app.UseAuthorization();
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

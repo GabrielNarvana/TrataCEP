@@ -6,18 +6,17 @@
 
   <ItemGroup>
     <None Remove="Data\Queries\EnderecoInsert.sql" />
-    <None Remove="Data\Queries\EnderecoSelectAll.sql" />
     <None Remove="Data\Queries\EnderecoSelectByCEP.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Data\Queries\EnderecoInsert.sql" />
-    <EmbeddedResource Include="Data\Queries\EnderecoSelectAll.sql" />
     <EmbeddedResource Include="Data\Queries\EnderecoSelectByCEP.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Npgsql" Version="5.0.4" />
   </ItemGroup>
 

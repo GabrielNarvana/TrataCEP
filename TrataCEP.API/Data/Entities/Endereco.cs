@@ -17,7 +17,7 @@ namespace TrataCEP.API.Data.Entities
         public string UF { get; set; }
         public Int32? IBGE { get; set; }
         public Int32? GIA { get; set; }
-        public Int32? DD { get; set; }
+        public Int32? DDD { get; set; }
         public Int32? Siafi { get; set; }
     }
 }

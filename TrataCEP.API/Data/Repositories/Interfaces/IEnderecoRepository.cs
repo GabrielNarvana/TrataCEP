@@ -9,7 +9,6 @@ namespace TrataCEP.API.Data.Repositories.Interfaces
     public interface IEnderecoRepository
     {
         Endereco GetByCEP(string CEP);
-        List<Endereco> GetAll();
         int Insert(Endereco endereco);
     }
 }

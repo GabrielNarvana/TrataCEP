@@ -11,84 +11,72 @@ using TrataCEP.API.Data.Entities;
 using TrataCEP.API.Data.Repositories.Interfaces;
 using System.IO;
 using TrataCEP.API.Helpers;
+using System.Text.Json;
 
 namespace TrataCEP.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("[controller]")]
     [ApiController]
     public class EnderecoController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IEnderecoRepository _enderecoRepository;
-        private readonly LogHelper _logHelper;
 
-        public EnderecoController(IConfiguration configuration, IEnderecoRepository enderecoRepository, LogHelper logHelper)
+        public EnderecoController(IConfiguration configuration, IEnderecoRepository enderecoRepository)
         {
             _configuration = configuration;
             _enderecoRepository = enderecoRepository;
-            _logHelper = logHelper;
         }
 
-        [ActionName("GetById")]
         [HttpGet]
-        public IActionResult GetByCEP([FromBody] string CEP)
+        [Route("GetByCEP")]
+        public IActionResult GetByCEP([FromBody] JsonElement requestBody)
         {
             try
             {
+               string CEP = (requestBody.GetProperty("cep").ToString()).Replace("-", "");
                var retorno = _enderecoRepository.GetByCEP(CEP);
+                if(retorno == null)
+                {
+                    return Ok();
+                }
                 return Ok(retorno);
             }
             catch (Exception ex)
             {
-                _logHelper.LogFile(ex, Process.GetCurrentProcess().ProcessName);
                 return StatusCode(500, ex);
             }
         }
-            [ActionName("GetAll")]
-            [HttpGet]
-            public IActionResult GetAll()
-            {
-            try
-            {
-                var retorno = _enderecoRepository.GetAll();
-                return Ok(retorno);
-            }
-            catch (Exception ex)
-            {
-                _logHelper.LogFile(ex, Process.GetCurrentProcess().ProcessName);
-                return StatusCode(500, ex);
-            }
-        }
-        [ActionName("Insert")]
+
         [HttpPost]
-        public IActionResult Insert([FromBody] JObject requestBody)
+        [Route("Insert")]
+        public IActionResult Insert([FromBody] JsonElement requestBody)
         {
             try
             {
-               Endereco endereco = new Endereco {
-                CEP = requestBody.SelectToken("CEP").ToString(),
-                Logradouro = requestBody.SelectToken("Logradouro").ToString(),
-                Complemento = requestBody.SelectToken("Complemento").ToString(),
-                Bairro = requestBody.SelectToken("Bairro").ToString(),
-                Localidade = requestBody.SelectToken("Localidade").ToString(),
-                UF = requestBody.SelectToken("UF").ToString(),
-                IBGE = Convert.ToInt32(requestBody.SelectToken("IBGE").ToString().Trim()),
-                GIA = Convert.ToInt32(requestBody.SelectToken("GIA").ToString().Trim()),
-                DD = Convert.ToInt32(requestBody.SelectToken("DD").ToString().Trim()),
-                Siafi = Convert.ToInt32(requestBody.SelectToken("Siafi").ToString().Trim())
-               };
+                Endereco endereco = new Endereco {
+                CEP = (requestBody.GetProperty("cep").ToString()).Replace("-", ""),
+                Logradouro = requestBody.GetProperty("logradouro").ToString(),
+                Complemento = requestBody.GetProperty("complemento").ToString(),
+                Bairro = requestBody.GetProperty("bairro").ToString(),
+                Localidade = requestBody.GetProperty("localidade").ToString(),
+                UF = requestBody.GetProperty("uf").ToString(),
+                IBGE = Int32.Parse(requestBody.GetProperty("ibge").ToString()),
+                GIA = Int32.Parse(requestBody.GetProperty("gia").ToString()),
+                DDD = Int32.Parse(requestBody.GetProperty("ddd").ToString()),
+                Siafi = Int32.Parse(requestBody.GetProperty("siafi").ToString())
+                };
               
                 var retorno = _enderecoRepository.Insert(endereco);
-                if (retorno != 0)
+                if(retorno == 0)
                 {
-                    return Ok(retorno);
+                    return StatusCode(500, "Ocorreu um erro, veja o log gerado para mais detalhes");
                 }
+                return Ok(retorno);
 
-                else return StatusCode(500, "Ocorreu um erro, veja o log gerado para mais detalhes");
             }
             catch (Exception ex)
             {
-                _logHelper.LogFile(ex, Process.GetCurrentProcess().ProcessName);
                 return StatusCode(500, ex);
             }
         }

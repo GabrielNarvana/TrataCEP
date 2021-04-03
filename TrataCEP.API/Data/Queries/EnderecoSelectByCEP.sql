@@ -1,2 +1,3 @@
 ﻿SELECT * FROM ENDERECO
-WHERE CEP LIKE ':CEP'
+WHERE CEP = @CEP
+order by DataCriacao desc
