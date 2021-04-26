@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TrataCEP.API.Helpers
 {
-    public class LogHelper
+    public static class LogHelper
     {
-        public void LogFile(Exception ex, string function)
+        public static void LogFile(Exception ex, string function)
         {
             DateTime date = DateTime.Now;
             string path = "C:\\Logs\\ERROR_TrataCEP.txt";

@@ -18,7 +18,7 @@ namespace TrataCEP.API.Data.Repositories
     {
         private readonly IPostgressConnection _postgressConnection;
         private readonly IConfiguration _configuration;
-
+     
         public EnderecoRepository(IPostgressConnection postgresConnection, IConfiguration configuration)
         {
             _postgressConnection = postgresConnection;
@@ -62,8 +62,7 @@ namespace TrataCEP.API.Data.Repositories
                 }
                 catch (Exception ex)
                 {
-                    LogHelper log = new LogHelper();
-                    log.LogFile(ex, Process.GetCurrentProcess().ProcessName);
+                    LogHelper.LogFile(ex, Process.GetCurrentProcess().ProcessName);
                     throw ex;
                 }
             }
@@ -101,8 +100,7 @@ namespace TrataCEP.API.Data.Repositories
                 }
                 catch (Exception ex)
                 {
-                    LogHelper log = new LogHelper();
-                    log.LogFile(ex, Process.GetCurrentProcess().ProcessName);
+                    LogHelper.LogFile(ex, Process.GetCurrentProcess().ProcessName);
                     throw ex;
                 }
             }
